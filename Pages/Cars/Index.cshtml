@@ -25,6 +25,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Car[0].Renter.RenterName)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Car[0].Collection.Name)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -43,6 +46,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Renter.RenterName)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Collection.Name)
+                </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |

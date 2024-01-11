@@ -14,7 +14,10 @@ namespace RentACar.Models
         public int? RenterID { get; set; }
         public Renter? Renter { get; set; }
 
-        public ICollection<CarCollection>? CarCollections { get; set; }
+        public int? CollectionID { get; set; }
+        public Collection? Collection { get; set; }
+
+        
 
     }
 }

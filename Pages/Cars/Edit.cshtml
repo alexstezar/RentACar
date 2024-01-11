@@ -35,6 +35,11 @@
                 <span asp-validation-for="Car.RenterID" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Car.CollectionID" class="control-label">Collection</label>
+                <select asp-for="Car.CollectionID" class="form-control" asp-items="ViewBag.CollectionID"></select>
+                <span asp-validation-for="Car.CollectionID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

@@ -22,6 +22,7 @@ namespace RentACar.Pages.Cars
         public IActionResult OnGet()
         {
             ViewData["RenterID"] = new SelectList(_context.Set<Renter>(), "ID", "RenterName");
+            ViewData["CollectionID"] = new SelectList(_context.Set<Collection>(), "ID", "Name");
             return Page();
         }
 

@@ -25,6 +25,7 @@ namespace RentACar.Pages.Cars
         {
             Car = await _context.Car
                 .Include(b => b.Renter)
+                .Include(b => b.Collection)
                 .ToListAsync();
         }
     }
