@@ -22,6 +22,33 @@ namespace RentACar.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("RentACar.Models.Borrowing", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<int?>("CarID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ClientID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReturnDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ClientID");
+
+                    b.ToTable("Borrowing");
+                });
+
             modelBuilder.Entity("RentACar.Models.Car", b =>
                 {
                     b.Property<int>("ID")
@@ -29,6 +56,9 @@ namespace RentACar.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<int?>("BorrowingID")
+                        .HasColumnType("int");
 
                     b.Property<int?>("CollectionID")
                         .HasColumnType("int");
@@ -49,11 +79,43 @@ namespace RentACar.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("BorrowingID")
+                        .IsUnique()
+                        .HasFilter("[BorrowingID] IS NOT NULL");
+
                     b.HasIndex("CollectionID");
 
                     b.HasIndex("RenterID");
 
                     b.ToTable("Car");
+                });
+
+            modelBuilder.Entity("RentACar.Models.Client", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Client");
                 });
 
             modelBuilder.Entity("RentACar.Models.Collection", b =>
@@ -94,8 +156,21 @@ namespace RentACar.Migrations
                     b.ToTable("Renter");
                 });
 
+            modelBuilder.Entity("RentACar.Models.Borrowing", b =>
+                {
+                    b.HasOne("RentACar.Models.Client", "Client")
+                        .WithMany("Borrowings")
+                        .HasForeignKey("ClientID");
+
+                    b.Navigation("Client");
+                });
+
             modelBuilder.Entity("RentACar.Models.Car", b =>
                 {
+                    b.HasOne("RentACar.Models.Borrowing", "Borrowing")
+                        .WithOne("Car")
+                        .HasForeignKey("RentACar.Models.Car", "BorrowingID");
+
                     b.HasOne("RentACar.Models.Collection", "Collection")
                         .WithMany("Cars")
                         .HasForeignKey("CollectionID");
@@ -104,9 +179,21 @@ namespace RentACar.Migrations
                         .WithMany("Cars")
                         .HasForeignKey("RenterID");
 
+                    b.Navigation("Borrowing");
+
                     b.Navigation("Collection");
 
                     b.Navigation("Renter");
+                });
+
+            modelBuilder.Entity("RentACar.Models.Borrowing", b =>
+                {
+                    b.Navigation("Car");
+                });
+
+            modelBuilder.Entity("RentACar.Models.Client", b =>
+                {
+                    b.Navigation("Borrowings");
                 });
 
             modelBuilder.Entity("RentACar.Models.Collection", b =>

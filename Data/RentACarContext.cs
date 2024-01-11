@@ -19,5 +19,9 @@ namespace RentACar.Data
         public DbSet<RentACar.Models.Renter>? Renter { get; set; }
 
         public DbSet<RentACar.Models.Collection>? Collection { get; set; }
+
+        public DbSet<RentACar.Models.Client>? Client { get; set; }
+
+        public DbSet<RentACar.Models.Borrowing>? Borrowing { get; set; }
     }
 }
