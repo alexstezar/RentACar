@@ -4,12 +4,18 @@ using RentACar.Data;
 using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
+});
+
 // Add services to the container.
 builder.Services.AddRazorPages(options =>
 {
     options.Conventions.AuthorizeFolder("/Cars");
     options.Conventions.AllowAnonymousToPage("/Cars/Index");
     options.Conventions.AllowAnonymousToPage("/Cars/Details");
+    options.Conventions.AuthorizeFolder("/Clients", "AdminPolicy");
 });
 builder.Services.AddDbContext<RentACarContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("RentACarContext") ?? throw new InvalidOperationException("Connection string 'RentACarContext' not found.")));
@@ -17,6 +23,7 @@ builder.Services.AddDbContext<RentACarContext>(options =>
 builder.Services.AddDbContext<LibraryIdentityContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("RentACarContext") ?? throw new InvalidOperationException("Connection string 'RentACar' not found. ")));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<LibraryIdentityContext>();
 
 var app = builder.Build();
