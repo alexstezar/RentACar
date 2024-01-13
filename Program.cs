@@ -15,7 +15,17 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AuthorizeFolder("/Cars");
     options.Conventions.AllowAnonymousToPage("/Cars/Index");
     options.Conventions.AllowAnonymousToPage("/Cars/Details");
+
+    options.Conventions.AllowAnonymousToPage("/Renters/Index");
+    options.Conventions.AllowAnonymousToPage("/Renters/Details");
+    options.Conventions.AuthorizeFolder("/Renters", "AdminPolicy");
+
+    options.Conventions.AllowAnonymousToPage("/Collections/Index");
+    options.Conventions.AllowAnonymousToPage("/Collections/Details");
+    options.Conventions.AuthorizeFolder("/Collections", "AdminPolicy");
+
     options.Conventions.AuthorizeFolder("/Clients", "AdminPolicy");
+
 });
 builder.Services.AddDbContext<RentACarContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("RentACarContext") ?? throw new InvalidOperationException("Connection string 'RentACarContext' not found.")));

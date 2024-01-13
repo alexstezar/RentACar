@@ -28,7 +28,10 @@ namespace RentACar.Pages.Cars
                 return NotFound();
             }
 
-            var car = await _context.Car.FirstOrDefaultAsync(m => m.ID == id);
+            var car = await _context.Car
+                .Include(b => b.Renter)
+                .Include(b => b.Collection)
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (car == null)
             {
                 return NotFound();
@@ -37,6 +40,7 @@ namespace RentACar.Pages.Cars
             {
                 Car = car;
             }
+
             return Page();
         }
     }

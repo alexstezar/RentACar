@@ -27,7 +27,8 @@ namespace RentACar.Pages.Borrowings
             {
                 Borrowing = await _context.Borrowing
                 .Include(b => b.Car)
-                .Include(b => b.Client).ToListAsync();
+                .Include(b => b.Client)
+                .ToListAsync();
             }
         }
     }

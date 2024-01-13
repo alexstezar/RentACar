@@ -16,19 +16,37 @@
             @Html.DisplayNameFor(model => model.Borrowing.Client)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Borrowing.Client.ID)
+            @Html.DisplayFor(model => model.Borrowing.Client.FullName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Borrowing.CarID)
+            @Html.DisplayNameFor(model => model.Borrowing.Car)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Borrowing.CarID)
+            @Html.DisplayFor(model => model.Borrowing.Car.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Borrowing.StartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Borrowing.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Borrowing.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Borrowing.StartDate)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Borrowing.ReturnDate)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Borrowing.ReturnDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Borrowing.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Borrowing.Price)
         </dd>
     </dl>
     

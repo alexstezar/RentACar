@@ -5,7 +5,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>All Borrowings</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -17,13 +17,19 @@
                 @Html.DisplayNameFor(model => model.Borrowing[0].Client)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Borrowing[0].CarID)
+                @Html.DisplayNameFor(model => model.Borrowing[0].Car)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Borrowing[0].Description)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Borrowing[0].StartDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Borrowing[0].ReturnDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Borrowing[0].Price)
             </th>
             <th></th>
         </tr>
@@ -35,13 +41,19 @@
                 @Html.DisplayFor(modelItem => item.Client.FullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CarID)
+                @Html.DisplayFor(modelItem => item.Car.Name)
             </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ReturnDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
             </td>
             
             <td>

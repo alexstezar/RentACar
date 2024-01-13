@@ -17,10 +17,10 @@ namespace RentACar.Models
         public int? CollectionID { get; set; }
         public Collection? Collection { get; set; }
 
-        [ForeignKey("BorrowingID")]
-        public Borrowing? Borrowing { get; set; }
+        public ICollection<Borrowing>? Borrowings { get; set; }
 
-        
+
+
 
     }
 }

@@ -36,7 +36,8 @@ namespace RentACar.Pages.Borrowings
                 return NotFound();
             }
             Borrowing = borrowing;
-           ViewData["ClientID"] = new SelectList(_context.Client, "ID", "FullName");
+            ViewData["ClientID"] = new SelectList(_context.Client, "ID", "FullName");
+            ViewData["CarID"] = new SelectList(_context.Car, "ID", "Name");
             return Page();
         }
 
